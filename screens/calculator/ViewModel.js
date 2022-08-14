@@ -37,6 +37,7 @@ const ViewModel = () => {
     else if (func === types.DECIMAL)
       handleDecimal()
     else {
+      if (arithmeticArr.length === 0 && func === types.EQUAL) return
       setArithmeticArr((previousArithmetic) => [...previousArithmetic, func])
     }
   }, [value])
@@ -64,6 +65,7 @@ const ViewModel = () => {
     let x = parseFloat(previousValue)
     let y = newValue === "" ? parseFloat(previousValue) : parseFloat(newValue)
     let arithmetic = arithmeticArr[0]
+    
     handleCompute(x, y, arithmetic)
   }
 
@@ -75,10 +77,12 @@ const ViewModel = () => {
     else if (arithmetic === types.MULTIPLY) res = x * y
     else if (arithmetic === types.MINUS) res = x - y
 
+    let isEqual = arithmeticArr[1] === types.EQUAL
+
     setArithmeticArr(
-      arithmeticArr[1] === types.EQUAL
-        ? []
-        : [arithmeticArr[1]]
+      isEqual 
+      ? [] 
+      : [arithmeticArr[1]]
     )
     setPreviousValue(formatResult(res))
     setNewValue("")

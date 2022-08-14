@@ -13,22 +13,22 @@ const CalculatorButton = () => {
         data: [
             [
                 {
-                    label: types.FUNC_AC,
+                    label: types.AC,
                     buttonStyle: styles.leftbutton,
                     textStyle: styles.textstyle
                 },
                 {
-                    label: types.FUNC_POSITIVE_NEGATIVE,
+                    label: types.POSITIVE_NEGATIVE,
                     buttonStyle: styles.leftbutton,
                     textStyle: styles.textstyle
                 },
                 {
-                    label: types.FUNC_DECIMAL,
+                    label: types.DECIMAL,
                     buttonStyle: styles.leftbutton,
                     textStyle: styles.textstyle
                 },
                 {
-                    label: types.FUNC_DIVIDE,
+                    label: types.DIVIDE,
                     buttonStyle: styles.rightbutton,
                     textStyle: styles.textstyle
                 }
@@ -50,7 +50,7 @@ const CalculatorButton = () => {
                     textStyle: styles.textstyle
                 },
                 {
-                    label: types.FUNC_MULTIPLY,
+                    label: types.MULTIPLY,
                     buttonStyle: styles.rightbutton,
                     textStyle: styles.textstyle
                 }
@@ -72,7 +72,7 @@ const CalculatorButton = () => {
                     textStyle: styles.textstyle
                 },
                 {
-                    label: types.FUNC_MINUS,
+                    label: types.MINUS,
                     buttonStyle: styles.rightbutton,
                     textStyle: styles.textstyle
                 }
@@ -94,7 +94,7 @@ const CalculatorButton = () => {
                     textStyle: styles.textstyle
                 },
                 {
-                    label: types.FUNC_PLUS,
+                    label: types.PLUS,
                     buttonStyle: styles.rightbutton,
                     textStyle: styles.textstyle
                 }
@@ -112,7 +112,7 @@ const CalculatorButton = () => {
                     textStyle: styles.textstyle
                 },
                 {
-                    label: types.FUNC_EQUAL,
+                    label: types.EQUAL,
                     buttonStyle: styles.rightbutton,
                     textStyle: styles.textstyle
                 }

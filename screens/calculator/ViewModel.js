@@ -1,5 +1,6 @@
-import { useCallback, useContext, useEffect, useState, useRef } from "react"
+import { useCallback, useContext, useEffect, useState } from "react"
 import { CalculatorContext } from "../../src/context/CalculatorContext";
+import { formatResult, getDecimalPlaces } from "../../src/helpers/index"
 import * as types from "../../src/helpers/constants/calculator"
 
 const ViewModel = () => {
@@ -9,28 +10,31 @@ const ViewModel = () => {
   const [arithmeticArr, setArithmeticArr] = useState([])
 
   const actionButton = (num) => {
-    let data = num
-    if (!isNaN(data) || data === types.DOT) {
-      if (data === "0" && value === "0") return
-      if (data === types.DOT && value === "0") data = "0" + data
+    let _num = num
+    
+    if (!isNaN(_num) || _num === types.DOT) {
+      if (_num === "0" && value === "0") return
+      if (_num === types.DOT && value === "0") _num = "0" + _num
+      if (getDecimalPlaces(value) === 6 && arithmeticArr.length === 0) return
+      
       if (arithmeticArr.length === 0) {
-        setPreviousValue(previousValue + data);
-        setValue(previousValue + data);
+        setPreviousValue(previousValue + _num);
+        setValue(previousValue + _num);
       } else {
-        setNewValue(newValue + data);
-        setValue(newValue + data);
+        setNewValue(newValue + _num);
+        setValue(newValue + _num);
       }
     } else {
-      handleAction(data)
+      handleAction(_num)
     }
   }
 
   const handleAction = useCallback((func) => {
-    if (func === types.FUNC_AC)
+    if (func === types.AC)
       handleAllClear()
-    else if (func === types.FUNC_POSITIVE_NEGATIVE)
+    else if (func === types.POSITIVE_NEGATIVE)
       handlePositiveNegative()
-    else if (func === types.FUNC_DECIMAL)
+    else if (func === types.DECIMAL)
       handleDecimal()
     else {
       setArithmeticArr((previousArithmetic) => [...previousArithmetic, func])
@@ -66,19 +70,19 @@ const ViewModel = () => {
   const handleCompute = (x, y, arithmetic) => {
     let res = 0
 
-    if (arithmetic === types.FUNC_DIVIDE) res = x / y
-    else if (arithmetic === types.FUNC_PLUS) res = x + y
-    else if (arithmetic === types.FUNC_MULTIPLY) res = x * y
-    else if (arithmetic === types.FUNC_MINUS) res = x - y
+    if (arithmetic === types.DIVIDE) res = x / y
+    else if (arithmetic === types.PLUS) res = x + y
+    else if (arithmetic === types.MULTIPLY) res = x * y
+    else if (arithmetic === types.MINUS) res = x - y
 
     setArithmeticArr(
-      arithmeticArr[1] === types.FUNC_EQUAL
+      arithmeticArr[1] === types.EQUAL
         ? []
         : [arithmeticArr[1]]
     )
-    setPreviousValue(res)
+    setPreviousValue(formatResult(res))
     setNewValue("")
-    setValue(res)
+    setValue(formatResult(res))
   }
 
   useEffect(() => {

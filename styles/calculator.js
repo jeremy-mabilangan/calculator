@@ -9,7 +9,8 @@ export const styles = StyleSheet.create({
         height: "25%",
         width: "100%",
         backgroundColor: "#262626",
-        padding: 10
+        padding: 10,
+        position: "relative"
     },
     buttongroupcontainer: {
         height: "75%",
@@ -43,11 +44,12 @@ export const styles = StyleSheet.create({
         fontWeight: "300"
     },
     inputstyle: {
-        fontSize: 70,
         fontWeight: "300",
         color: "white",
         textAlign: "right",
         width: "100%",
-        marginTop: "10%"
+        marginTop: "10%",
+        position: "absolute",
+        bottom: 10
     }
 });

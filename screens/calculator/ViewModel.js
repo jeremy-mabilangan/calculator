@@ -8,14 +8,17 @@ const ViewModel = () => {
   const [newValue, setNewValue] = useState("")
   const [arithmeticArr, setArithmeticArr] = useState([])
 
-  const actionButton = (data) => {
+  const actionButton = (num) => {
+    let data = num
     if (!isNaN(data) || data === types.DOT) {
+      if (data === "0" && value === "0") return
+      if (data === types.DOT && value === "0") data = "0" + data
       if (arithmeticArr.length === 0) {
-        setPreviousValue(parseFloat(previousValue + data));
-        setValue(parseFloat(previousValue + data));
+        setPreviousValue(previousValue + data);
+        setValue(previousValue + data);
       } else {
-        setNewValue(parseFloat(newValue + data));
-        setValue(parseFloat(newValue + data));
+        setNewValue(newValue + data);
+        setValue(newValue + data);
       }
     } else {
       handleAction(data)
@@ -69,10 +72,10 @@ const ViewModel = () => {
     else if (arithmetic === types.FUNC_MINUS) res = x - y
 
     setArithmeticArr(
-        arithmeticArr[1] === types.FUNC_EQUAL 
-        ? [] 
-        : [arithmeticArr[1]] 
-      )
+      arithmeticArr[1] === types.FUNC_EQUAL
+        ? []
+        : [arithmeticArr[1]]
+    )
     setPreviousValue(res)
     setNewValue("")
     setValue(res)

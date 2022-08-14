@@ -15,7 +15,8 @@ const ButtonGroup = (props) => {
                         {item?.map(i => {
                             return (
                                 <Button label={i.label}
-                                    buttonStyle={{...i.buttonStyle, width: i.width ? i.width : i.buttonStyle.width}}
+                                    action={buttonProps?.action}
+                                    buttonStyle={{ ...i.buttonStyle, width: i.width ? i.width : i.buttonStyle.width }}
                                     textStyle={i.textStyle}
                                     key={i.label} />
                             )

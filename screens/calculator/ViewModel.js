@@ -15,6 +15,7 @@ const ViewModel = () => {
     if (!isNaN(_num) || _num === types.DOT) {
       if (_num === "0" && value === "0") return
       if (_num === types.DOT && value === "0") _num = "0" + _num
+      if (_num === types.DOT && value.includes(types.DOT)) return
       if (getDecimalPlaces(value) === 6 && arithmeticArr.length === 0) return
       
       if (arithmeticArr.length === 0) {
@@ -29,16 +30,16 @@ const ViewModel = () => {
     }
   }
 
-  const handleAction = useCallback((func) => {
-    if (func === types.AC)
+  const handleAction = useCallback((a) => {
+    if (a === types.AC)
       handleAllClear()
-    else if (func === types.POSITIVE_NEGATIVE)
+    else if (a === types.POSITIVE_NEGATIVE)
       handlePositiveNegative()
-    else if (func === types.DECIMAL)
+    else if (a === types.DECIMAL)
       handleDecimal()
     else {
-      if (arithmeticArr.length === 0 && func === types.EQUAL) return
-      setArithmeticArr((previousArithmetic) => [...previousArithmetic, func])
+      if (arithmeticArr.length === 0 && a === types.EQUAL) return
+      setArithmeticArr((previousArithmetic) => [...previousArithmetic, a])
     }
   }, [value])
 
@@ -52,13 +53,13 @@ const ViewModel = () => {
   const handlePositiveNegative = () => {
     let res = parseFloat(value) * -1
     setPreviousValue(res)
-    setValue(res)
+    setValue(formatResult(res))
   }
 
   const handleDecimal = () => {
     let res = parseFloat(value) * .01
     setPreviousValue(res)
-    setValue(res)
+    setValue(formatResult(res))
   }
 
   const validateCompute = () => {

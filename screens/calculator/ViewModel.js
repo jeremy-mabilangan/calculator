@@ -78,7 +78,7 @@ const ViewModel = () => {
     else if (arithmetic === types.MULTIPLY) res = x * y
     else if (arithmetic === types.MINUS) res = x - y
 
-    let isEqual = arithmeticArr[1] === types.EQUAL
+    const isEqual = arithmeticArr[1] === types.EQUAL
 
     setArithmeticArr(
       isEqual 
